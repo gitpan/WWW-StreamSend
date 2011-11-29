@@ -1,0 +1,6 @@
+Revision history for Perl extension WWW::StreamSend.
+
+0.01  Wed Nov 30 01:22:49 2011
+	- original version; created by h2xs 1.23 with options
+		-X WWW::StreamSend
+
