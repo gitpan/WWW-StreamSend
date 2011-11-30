@@ -1,9 +1,9 @@
 --- #YAML:1.0
 name:               WWW-StreamSend
-version:            0.01
+version:            0.02
 abstract:           StreamSend API implementation
 author:
-    - User <user@>
+    - Michael Katasonov <dionabak@gmail.com>
 license:            unknown
 distribution_type:  module
 configure_requires:

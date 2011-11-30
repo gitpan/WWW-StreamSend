@@ -1,5 +1,11 @@
 Revision history for Perl extension WWW::StreamSend.
 
+0.02  Wed Dec 01 01:05:49 2011
+    - added param reference check in constructor
+    - improved documentation
+    - audience is class now, accessors are realized in WWW::StreamSend::Audience and it's superclass
+    - todo: realise classes for subscribers and mutator methods for audiences
+
 0.01  Wed Nov 30 01:22:49 2011
 	- original version; created by h2xs 1.23 with options
 		-X WWW::StreamSend

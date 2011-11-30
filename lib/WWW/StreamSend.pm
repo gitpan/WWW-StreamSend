@@ -8,14 +8,20 @@ use AutoLoader qw(AUTOLOAD);
 
 use LWP::UserAgent;
 use XML::Simple;
-use Data::Dumper;
+use Carp ();
 
-our $VERSION = '0.01';
+use WWW::StreamSend::Audience;
+use WWW::StreamSend::Subscriber;
+
+our $VERSION = '0.02';
 
 sub new {
     my ($class, $params) = @_;
 
-     my $self = {
+    Carp::croak("Options to WWW::StreamSend should be hash reference")
+        if ref($params) ne ref {};
+
+    my $self = {
         login_id => $params->{login_id} || $params->{login},
         key => $params->{key},
         ua  => LWP::UserAgent->new,
@@ -66,6 +72,36 @@ sub get_field {
         $self->_send_request($accepted_fields->{$params->{field}}, $params->{id}) :
         $self->_send_request($accepted_fields->{$params});
     return $res->{content};
+}
+
+sub get_people {
+    my ($self, $params) = @_;
+}
+
+sub get_audience {
+    my ($self, $params) = @_;
+    my $res = (exists $params->{id}) ?
+        $self->_send_request('audiences', $params->{id}) :
+        $self->_send_request('audiences');
+
+    if ($res->{code} == '200') {
+        my $xml = $res->{content};
+        my $data = XMLin($xml, ForceArray=>1);
+
+        if ($data->{type} || $data->{type} eq 'array') {
+            my @ret = ();
+            foreach my $item (@{$data->{audience}}) {
+                my $audience = WWW::StreamSend::Audience->new({xml => '', data => $item});
+                push @ret, $audience;
+            }
+            return @ret;
+        }
+        else { # 1 audience
+            my $audience = WWW::StreamSend::Audience->new({xml => $xml, data => $data});
+            return $audience;
+        }
+    }
+    return;
 }
 
 sub add_subscriber {
@@ -202,7 +238,14 @@ Returns the counter value for subscribers in given audience. Example:
 
 Available values for 'type' key are: 'active', 'inactive', 'unsubscribed', 'pending'
 
-=item $ss->get_field
+=item $ss->get_audience( \%options )
+
+Dispatch a C<GET> request to fetch current audience or audience list. Example:
+
+  my $audience = $ss->get_audience({id => 1});
+  my @audiences_all = $ss->get_audience;
+
+Returns either one WWW::StreamSend::Audience instance or list of them.
 
 =item $ss->add_subscriber( \%options )
 
