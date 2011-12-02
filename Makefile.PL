@@ -5,8 +5,12 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'WWW::StreamSend',
     VERSION_FROM      => 'lib/WWW/StreamSend.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {
+        'XML::Simple'   => 0,
+        'LWP'           => 0,
+        'Carp'          => 0,
+    },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/WWW/StreamSend.pm', # retrieve abstract from module
-       AUTHOR         => 'Michael Katasonov <dionabak@gmail.com>') : ()),
+       AUTHOR         => 'Michael Katasonov <kabanoid@cpan.org>') : ()),
 );

@@ -13,7 +13,7 @@ use Carp ();
 use WWW::StreamSend::Audience;
 use WWW::StreamSend::Subscriber;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub new {
     my ($class, $params) = @_;
@@ -245,7 +245,7 @@ Dispatch a C<GET> request to fetch current audience or audience list. Example:
   my $audience = $ss->get_audience({id => 1});
   my @audiences_all = $ss->get_audience;
 
-Returns either one WWW::StreamSend::Audience instance or list of them.
+Returns either one L<WWW::StreamSend::Audience> instance or list of them.
 
 =item $ss->add_subscriber( \%options )
 

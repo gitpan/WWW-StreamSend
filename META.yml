@@ -1,16 +1,19 @@
 --- #YAML:1.0
 name:               WWW-StreamSend
-version:            0.02
+version:            0.03
 abstract:           StreamSend API implementation
 author:
-    - Michael Katasonov <dionabak@gmail.com>
+    - Michael Katasonov <kabanoid@cpan.org>
 license:            unknown
 distribution_type:  module
 configure_requires:
     ExtUtils::MakeMaker:  0
 build_requires:
     ExtUtils::MakeMaker:  0
-requires:  {}
+requires:
+    Carp:         0
+    LWP:          0
+    XML::Simple:  0
 no_index:
     directory:
         - t

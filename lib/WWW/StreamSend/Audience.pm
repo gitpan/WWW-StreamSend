@@ -7,7 +7,7 @@ __END__
 
 =head1 NAME
 
-WWW::StreamSend::Audience - StreamSend Audience Instance
+WWW::StreamSend::Audience - StreamSend Audience Class
 
 =head1 SYNOPSIS
 
